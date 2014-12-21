@@ -1,0 +1,10 @@
+<div>
+  <% if logged_in? %>
+    <%= link_to 'All Users', users_path %> |
+    <%= link_to 'Create Status', new_status_path %> |
+    <%= link_to 'Logout', logout_path %>
+  <% else %>
+    <%= link_to 'Login', login_path %> |
+    <%= link_to 'Register', register_path %> |
+  <% end %>
+</div>

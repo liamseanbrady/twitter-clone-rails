@@ -1,0 +1,7 @@
+<%= render 'shared/header', title: "@#{@user.username}" %>
+
+<ul>
+  <% @user.statuses.each do |status| %>
+    <li><%= status.body %> on <strong><%= display_datetime(status.created_at) %></strong></li>
+  <% end %>
+</ul>
