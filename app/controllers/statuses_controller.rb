@@ -11,7 +11,7 @@ class StatusesController < ApplicationController
 
     if @status.save
       flash[:notice] = 'You created a new status'
-      redirect_to root_path
+      redirect_to user_path(@status.creator)
     else
       render :new
     end

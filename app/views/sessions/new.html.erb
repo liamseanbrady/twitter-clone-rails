@@ -1,11 +1,17 @@
 <%= render 'shared/header', title: 'Log in' %>
 
-<%= form_tag '/login', method: 'post' do %>
-  <%= label_tag :username %>
-  <%= text_field_tag :username, params[:username] %>
-  </br>
-  <%= label_tag :password %>
-  <%= password_field_tag :password, params[:password] %>
-  <br/>
-  <%= submit_tag 'Log in' %>
-<% end %>
+<div class="col-sm-6">
+  <%= form_tag '/login', method: 'post', role: 'form' do %>
+    <div class="form-group">
+      <%= label_tag :username %>
+      <%= text_field_tag :username, params[:username], class: 'form-control' %>
+      </br>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password %>
+      <%= password_field_tag :password, params[:password], class: 'form-control' %>
+      <br/>
+    </div>
+    <%= submit_tag 'Log in', class: 'btn btn-success' %>
+  <% end %>
+</div>

@@ -1,7 +1,13 @@
-<%= render 'shared/header', title: "@#{@user.username}" %>
+<%= link_to user_path(@user) do %>
+  <%= render 'shared/header', title: "@#{@user.username}" %>
+<% end %>
 
-<ul>
-  <% @user.statuses.each do |status| %>
-    <li><%= status.body %> on <strong><%= display_datetime(status.created_at) %></strong></li>
+<ul class="list-unstyled">
+  <% if !@user.statuses.empty? %>
+    <% @user.statuses.each do |status| %>
+      <li><%= status.body %> on <strong><%= display_datetime(status.created_at) %></strong></li>
+    <% end %>
+  <% else %>
+    <li>This user hasn't created any statuses yet...</li>
   <% end %>
 </ul>
