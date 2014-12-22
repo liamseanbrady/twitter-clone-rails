@@ -13,4 +13,5 @@ TwitterCloneRails::Application.routes.draw do
 
   get '/:username', to: 'users#show', as: 'user'
   post '/:username/follow', to: 'users#follow', as: 'follow_user'
+  post '/:username/unfollow', to: 'users#unfollow', as: 'unfollow_user'
 end

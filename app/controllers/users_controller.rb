@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :follow]
-  before_action :require_user, only: [:index, :show, :follow]
-  before_action :require_different_user, only: [:follow]
+  before_action :set_user, only: [:show, :follow, :unfollow]
+  before_action :require_user, only: [:index, :show, :follow, :unfollow]
+  before_action :require_different_user, only: [:follow, :unfollow]
 
   def index
     @users = User.all
@@ -26,12 +26,22 @@ class UsersController < ApplicationController
   def show; end
 
   def follow
-    @user.followers << current_user
-
-    if @user.save
-      flash[:notice] = "You are now following this user"
+    if @user
+      current_user.followings << @user
+      flash[:notice] = "You are now following #{@user.username}"
     else
       flash[:error] = "Follow was unsuccessful. Try again."
+    end
+
+    redirect_to :back
+  end
+
+  def unfollow
+    if @user
+      current_user.followings.delete(@user)
+      flash[:notice] = "You stopped following #{@user.username}"
+    else
+      flash[:error] = "Unfollow was unsuccessful. Try again"
     end
 
     redirect_to :back
