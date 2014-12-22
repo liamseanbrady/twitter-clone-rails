@@ -2,6 +2,14 @@
   <%= render 'shared/header', title: "@#{@user.username}" %>
 <% end %>
 
+<% if @user != current_user %>
+  <%= link_to follow_user_path(@user), method: 'post' do %>
+    <span class="glyphicon glyphicon-plus"></span> <strong>Follow <%= @user.username %></strong>
+  <% end %>
+  </br>
+  </br>
+<% end %>
+
 <ul class="list-unstyled">
   <% if !@user.statuses.empty? %>
     <% @user.statuses.each do |status| %>
@@ -11,3 +19,15 @@
     <li>This user hasn't created any statuses yet...</li>
   <% end %>
 </ul>
+
+<h4>Followers</h4>
+
+<% @user.followers.each do |follower| %>
+  <p><%= link_to "@#{follower.username}", user_path(follower) %></p>
+<% end %>
+
+<h4>Following</h4>
+
+<% @user.followings.each do |following| %>
+  <p><%= link_to "@#{following.username}", user_path(following) %></p>
+<% end %>

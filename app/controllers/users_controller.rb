@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: [:index, :show]
+  before_action :set_user, only: [:show, :follow]
+  before_action :require_user, only: [:index, :show, :follow]
+  before_action :require_different_user, only: [:follow]
 
   def index
     @users = User.all
@@ -21,8 +23,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find_by(username: params[:username])
+  def show; end
+
+  def follow
+    @user.followers << current_user
+
+    if @user.save
+      flash[:notice] = "You are now following this user"
+    else
+      flash[:error] = "Follow was unsuccessful. Try again."
+    end
+
+    redirect_to :back
   end
 
   private
@@ -30,4 +42,17 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password)
   end
+
+  def set_user
+    @user = User.find_by(username: params[:username])
+  end
+
+  def require_different_user
+    if @user == current_user
+      flash[:error] = "You're not allowed to do that"
+      redirect_to :back
+    end
+  end
 end
+
+

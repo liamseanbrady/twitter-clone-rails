@@ -12,4 +12,5 @@ TwitterCloneRails::Application.routes.draw do
   resources :statuses, only: [:new, :create, :show]
 
   get '/:username', to: 'users#show', as: 'user'
+  post '/:username/follow', to: 'users#follow', as: 'follow_user'
 end
