@@ -1,0 +1,8 @@
+<div class="clearfix">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p><%= linkify(status.body) %></p>
+      <p>by <%= link_to status.creator.username, user_path(status.creator) %> at <strong><%= status.created_at %></strong></p>
+    </div>
+  </div>
+</div>

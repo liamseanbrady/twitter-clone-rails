@@ -1,0 +1,7 @@
+<%= render 'shared/header', title: "Mentions" %>
+
+<div class="col-sm-6">
+  <% current_user.mentions.each do |mention| %>
+    <%= render mention.status %>
+  <% end %>
+</div>

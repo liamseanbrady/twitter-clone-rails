@@ -52,7 +52,11 @@ class UsersController < ApplicationController
     current_user.followings.each do |user|
       @statuses << user.statuses
     end
-    @statuses.flatten!.sort_by { |s| s.created_at }
+    @statuses.flatten!.sort_by { |s| s.created_at } if !@statuses.empty?
+  end
+
+  def mentions
+    current_user.mark_unread_mentions!
   end
 
   private

@@ -3,6 +3,7 @@
     <ul class="nav navbar-nav">
       <% if logged_in? %>
         <li><%= link_to 'Home', timeline_path %></li>
+        <li><%= link_to current_user.num_unread_mentions == 0 ? "Mentions" : "Mentions (#{current_user.num_unread_mentions})", mentions_path %></li>
         <li><%= link_to 'All Users', users_path %></li>
         <li><%= link_to 'New Status', new_status_path %></li>
         <li><%= link_to 'Logout', logout_path %></li>
